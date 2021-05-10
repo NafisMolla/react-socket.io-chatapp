@@ -26,7 +26,8 @@ function App() {
     });
 
     socket.on("recieve_message", (data) => {
-      setMessageList(messageList => [...messageList, data]);
+      setMessageList(messageList => 
+      [...messageList, data]);
     });
 
     socket.on("joined_user", (data) => {

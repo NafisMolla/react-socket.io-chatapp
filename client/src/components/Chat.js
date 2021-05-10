@@ -1,4 +1,4 @@
-import React, { useContext,useState } from "react";
+import React, { useContext,useState,useRef,useEffect } from "react";
 import "../App.css";
 import { chatContext } from "../contexts/Contexts";
 
@@ -12,14 +12,24 @@ export default function Chat() {
     users,
   } = useContext(chatContext);
 
+  const messagesEndRef = useRef(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+  }
+
+  useEffect(() => {
+      scrollToBottom()
+  }, [messageList])
+
 
   return (
     <div className="column-container">
         <div className="room-container">
         </div>
         <div className="row-container">
-            <div className="chatContainer">
-                <div className="messages">
+            <div className="chatContainer" >
+                <div className="messages" ref={messagesEndRef}>
                 {messageList.map((val, key) => {
                     return (
                         <div
